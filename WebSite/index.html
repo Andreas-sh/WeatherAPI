@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    
+    <link rel="stylesheet" href="style.css" />
+    <title></title>
+</head>
+<body>
+    <h1>Weather in different countries</h1>
+    <form>
+        <label for="towns">Type a town:</label>
+        <input type="text" name="towns" id="towns"><br><br>
+    </form>
+    <button onclick="Weather()">Check Weather</button>
+    <table>
+        <tr>
+            <th>Town Name</th>
+            <th>Town Temperature (°C)</th>
+            <th>Local Time</th>
+            <th>Weather</th>
+            <th>Weather Icon</th>
+            <th>Sunrise Time</th>
+            <th>Sunset Time</th>
+        </tr>
+        <tr>
+            <td id="town_name"></td>
+            <td id="town_temp"></td>
+            <td id="Local_time"></td>
+            <td id="weather"></td>
+            <td><img id="weather_pic"src=""></td>
+            <td id="sunrise"></td>
+            <td id="sunset"></td>
+            
+
+        </tr>
+    </table>
+    <script src="script.js"></script>
+</body>
+</html>
