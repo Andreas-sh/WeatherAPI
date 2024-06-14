@@ -19,8 +19,8 @@ namespace Web_API.Controllers
             _weatherForecastService = new WeatherForecastService(configuration);
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public async Task<IActionResult> Get(string city)
+        [HttpGet("GetWeatherForecast")]
+        public async Task<IActionResult> GetWeatherForecast(string city)
         {
             WeatherForecast finalResponse = new WeatherForecast();
 
@@ -39,9 +39,24 @@ namespace Web_API.Controllers
                 finalResponse.Sunrise = astronomyResponse.Sunrise;
                 finalResponse.sunset = astronomyResponse.sunset;
             }
+            
             return Ok(finalResponse);
             //return BadRequest();
         }
 
+        [HttpGet("GetCityNames")]
+        public async Task<IActionResult> GetCityNames(string? city)
+        {
+            if (string.IsNullOrWhiteSpace(city)){
+                return BadRequest("City was not be empty");
+            }
+            if (city.Length < 3)
+            {
+                return BadRequest("City name should be more than 2 characters");
+            }
+            
+            AutocompleteResponse[]? autoCompleteResponse = _weatherForecastService.SearchCities(city);
+            return Ok(autoCompleteResponse);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Text.Json.Nodes;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using Web_API.models;
 using Web_API.models.weatherapi;
@@ -67,6 +68,34 @@ public class WeatherForecastService
                 return null;
             }
         }
+    }
+    public AutocompleteResponse[]? SearchCities(string forecastCity)
+    {
+        using (HttpClient client = GetBaseHttpClient())
+        {
+            string url3 = "search.json?key=" + WeatherApiKey + "&q=" + forecastCity;
+            HttpResponseMessage response3 = client.GetAsync(url3).Result;
+            if(response3.IsSuccessStatusCode){
+                string result3 = response3.Content.ReadAsStringAsync().Result;
+                var jsonObject3 = JsonObject.Parse(result3);
+                JsonArray arr = jsonObject3.AsArray();
+                AutocompleteResponse[] responseArr = new AutocompleteResponse[arr.Count]; 
+                for(int i=0; i<arr.Count; i++){
+                    AutocompleteResponse autocompleteResponse = new AutocompleteResponse();
+                    autocompleteResponse.Name = arr[i]["name"].GetValue<string>();
+                    autocompleteResponse.Country = arr[i]["country"].GetValue<string>();
+                    responseArr[i] = autocompleteResponse;
+                }
+
+                
+                
+                return responseArr;
+            }
+            else{
+                return null;
+            }
+        }
+
     }
 
     private HttpClient GetBaseHttpClient()
