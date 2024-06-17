@@ -5,6 +5,6 @@
     "\\Web_API\\Controllers",
     "\\Web_API\\Services"
   ],
-  "SelectedNode": "\\Web_API\\Web API.sln",
+  "SelectedNode": "\\Web_API\\Controllers\\WeatherForecastController.cs",
   "PreviewInSolutionExplorer": false
 }

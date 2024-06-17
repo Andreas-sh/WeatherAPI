@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\andre\\Desktop\\WebSite\\Web_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C0A2467A-DFB9-4CE8-9E31-FF99F347DFFC}|Web API.csproj|c:\\users\\andre\\desktop\\website\\web_api\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0A2467A-DFB9-4CE8-9E31-FF99F347DFFC}|Web API.csproj|solutionrelative:controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C0A2467A-DFB9-4CE8-9E31-FF99F347DFFC}|Web API.csproj|c:\\users\\andre\\desktop\\website\\web_api\\services\\dbservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0A2467A-DFB9-4CE8-9E31-FF99F347DFFC}|Web API.csproj|solutionrelative:services\\dbservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C0A2467A-DFB9-4CE8-9E31-FF99F347DFFC}|Web API.csproj|c:\\users\\andre\\desktop\\website\\web_api\\models\\weatherapi\\forecastresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C0A2467A-DFB9-4CE8-9E31-FF99F347DFFC}|Web API.csproj|solutionrelative:models\\weatherapi\\forecastresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C0A2467A-DFB9-4CE8-9E31-FF99F347DFFC}|Web API.csproj|c:\\users\\andre\\desktop\\website\\web_api\\services\\weatherforecastservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0A2467A-DFB9-4CE8-9E31-FF99F347DFFC}|Web API.csproj|solutionrelative:services\\weatherforecastservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C0A2467A-DFB9-4CE8-9E31-FF99F347DFFC}|Web API.csproj|c:\\users\\andre\\desktop\\website\\web_api\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0A2467A-DFB9-4CE8-9E31-FF99F347DFFC}|Web API.csproj|solutionrelative:controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C0A2467A-DFB9-4CE8-9E31-FF99F347DFFC}|Web API.csproj|c:\\users\\andre\\desktop\\website\\web_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C0A2467A-DFB9-4CE8-9E31-FF99F347DFFC}|Web API.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C0A2467A-DFB9-4CE8-9E31-FF99F347DFFC}|Web API.csproj|c:\\users\\andre\\desktop\\website\\web_api\\models\\weatherapi\\astronomyresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,11 +30,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\WebSite\\Web_API\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\WebSite\\Web_API\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-17T08:53:19.528Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DBService.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\WebSite\\Web_API\\Services\\DBService.cs",
+              "RelativeDocumentMoniker": "Services\\DBService.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\WebSite\\Web_API\\Services\\DBService.cs",
+              "RelativeToolTip": "Services\\DBService.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAuwBEAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-17T08:14:49.079Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "AstronomyResponse.cs",
               "DocumentMoniker": "C:\\Users\\andre\\Desktop\\WebSite\\Web_API\\models\\weatherapi\\AstronomyResponse.cs",
               "RelativeDocumentMoniker": "models\\weatherapi\\AstronomyResponse.cs",
@@ -57,25 +87,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "WeatherForecastService.cs",
-              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\WebSite\\Web_API\\Services\\WeatherForecastService.cs",
-              "RelativeDocumentMoniker": "Services\\WeatherForecastService.cs",
-              "ToolTip": "C:\\Users\\andre\\Desktop\\WebSite\\Web_API\\Services\\WeatherForecastService.cs",
-              "RelativeToolTip": "Services\\WeatherForecastService.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAQwC8AAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T10:56:28.269Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "WeatherForecastController.cs",
               "DocumentMoniker": "C:\\Users\\andre\\Desktop\\WebSite\\Web_API\\Controllers\\WeatherForecastController.cs",
               "RelativeDocumentMoniker": "Controllers\\WeatherForecastController.cs",
               "ToolTip": "C:\\Users\\andre\\Desktop\\WebSite\\Web_API\\Controllers\\WeatherForecastController.cs",
               "RelativeToolTip": "Controllers\\WeatherForecastController.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAACcAAABAAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABgAAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-11T08:15:14.764Z",
               "EditorCaption": ""

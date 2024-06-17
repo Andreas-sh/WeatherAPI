@@ -12,11 +12,13 @@ namespace Web_API.Controllers
     {
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly WeatherForecastService _weatherForecastService;
+        private readonly DBService _dbservice;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration configuration)
         {
             _logger = logger;
             _weatherForecastService = new WeatherForecastService(configuration);
+            _dbservice = new DBService(configuration);
         }
 
         [HttpGet("GetWeatherForecast")]
@@ -57,6 +59,12 @@ namespace Web_API.Controllers
             
             AutocompleteResponse[]? autoCompleteResponse = _weatherForecastService.SearchCities(city);
             return Ok(autoCompleteResponse);
+        }
+        [HttpGet("GetDBList")]
+        public async Task<IActionResult> GetDBList(string countryName , string cityName) 
+        { 
+             List<WeatherForecast> response =  _dbservice.GetCityForecast(countryName , cityName);
+             return Ok(response);
         }
     }
 }
