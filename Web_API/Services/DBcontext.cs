@@ -12,6 +12,7 @@ namespace Web_API.Services
     {
         public DBcontext(DbContextOptions<DBcontext> options) : base(options) { }
 
-        public DbSet<DbResponse> TodoItems { get; set; }
+        public DbSet<WeatherItem> WeatherItems { get; set; }
+        public DbSet<AstronomyItem> AstronomyItems { get; set; }
     }
 }

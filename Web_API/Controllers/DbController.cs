@@ -17,16 +17,16 @@ public class TodoController : ControllerBase
 
     // GET: api/Todo
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<DbResponse>>> GetTodoItems()
+    public async Task<ActionResult<IEnumerable<WeatherItem>>> GetTodoItems()
     {
-        return await _context.TodoItems.ToListAsync();
+        return await _context.WeatherItems.ToListAsync();
     }
 
     // GET: api/Todo/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<DbResponse>> GetTodoItem(long id)
+    public async Task<ActionResult<WeatherItem>> GetTodoItem(long id)
     {
-        var todoItem = await _context.TodoItems.FindAsync(id);
+        var todoItem = await _context.WeatherItems.FindAsync(id);
 
         if(todoItem == null)
         {
@@ -37,10 +37,10 @@ public class TodoController : ControllerBase
     }
 
     // POST: api/Todo
-    [HttpPost]
-    public async Task<ActionResult<DbResponse>> PostTodoItem(DbResponse todoItem)
+   [HttpPost]
+    public async Task<ActionResult<WeatherItem>> PostTodoItem(WeatherItem todoItem)
     {
-        _context.TodoItems.Add(todoItem);
+        _context.WeatherItems.Add(todoItem);
         await _context.SaveChangesAsync();
 
         return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.Id }, todoItem);
@@ -48,7 +48,7 @@ public class TodoController : ControllerBase
 
     // PUT: api/Todo/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutTodoItem(long id, DbResponse todoItem)
+    public async Task<IActionResult> PutTodoItem(long id, WeatherItem todoItem)
     {
         if(id != todoItem.Id)
         {
@@ -80,13 +80,13 @@ public class TodoController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteTodoItem(long id)
     {
-        var todoItem = await _context.TodoItems.FindAsync(id);
+        var todoItem = await _context.WeatherItems.FindAsync(id);
         if(todoItem == null)
         {
             return NotFound();
         }
 
-        _context.TodoItems.Remove(todoItem);
+        _context.WeatherItems.Remove(todoItem);
         await _context.SaveChangesAsync();
 
         return NoContent();
@@ -94,6 +94,47 @@ public class TodoController : ControllerBase
 
     private bool TodoItemExists(long id)
     {
-        return _context.TodoItems.Any(e => e.Id == id);
+        return _context.WeatherItems.Any(e => e.Id == id);
+    }
+        // GET: api/Todo
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<AstronomyItem>>> GetAstronomyItems()
+    {
+        return await _context.AstronomyItems.ToListAsync();
+    }
+
+    // GET: api/Todo/5
+    // POST: api/Todo
+    [HttpPost]
+    public async Task<ActionResult<AstronomyItem>> PostAstronomyItem(AstronomyItem todoItem)
+    {
+        _context.AstronomyItems.Add(todoItem);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction(nameof(GetTodoItem), new { sunriseTime = todoItem.Id }, todoItem);
+    }
+
+    // PUT: api/Todo/5
+  
+
+    // DELETE: api/Todo/5
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAstronomyItem(long id)
+    {
+        var todoItem = await _context.AstronomyItems.FindAsync(id);
+        if(todoItem == null)
+        {
+            return NotFound();
+        }
+
+        _context.AstronomyItems.Remove(todoItem);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    private bool AstronomyItemExists(long id)
+    {
+        return _context.AstronomyItems.Any(e => e.Id == id);
     }
 }

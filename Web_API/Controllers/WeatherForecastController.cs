@@ -60,6 +60,7 @@ namespace Web_API.Controllers
             AutocompleteResponse[]? autoCompleteResponse = _weatherForecastService.SearchCities(city);
             return Ok(autoCompleteResponse);
         }
+        
         [HttpGet("GetDBList")]
         public async Task<IActionResult> GetDBList(string countryName , string cityName) 
         { 
