@@ -17,11 +17,11 @@ public class WeatherForecastService
         WeatherApiKey = _configuration["MyCustomKey"];
     }
     
-    public ForecastResponse? GetCurrentForecast(string forecastCity)
+    public ForecastResponse? GetCurrentForecast(string forecastCity, string forecastCountry)
     {
         using (HttpClient client = GetBaseHttpClient())
         {
-            string url = "forecast.json?key=" + WeatherApiKey + "&q=" + forecastCity + "&days=1&aqi=no&alerts=no";
+            string url = "forecast.json?key=" + WeatherApiKey + "&q=" + forecastCity + " " + forecastCountry + "&days=1&aqi=no&alerts=no";
             HttpResponseMessage response =  client.GetAsync(url).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -46,12 +46,12 @@ public class WeatherForecastService
 
     }
 
-    public AstronomyResponse? GetAstronomy(string forecastCity)
+    public AstronomyResponse? GetAstronomy(string forecastCity, string forecastCountry)
     {
         using (HttpClient client = GetBaseHttpClient())
         {
             DateTime thisDay = DateTime.Today;
-            string url2 = "astronomy.json?key=" + WeatherApiKey + "&q=" + forecastCity + "&dt=" + thisDay.ToString("yyyy-MM-dd");
+            string url2 = "astronomy.json?key=" + WeatherApiKey + "&q=" + forecastCity  + " " + forecastCountry + "&dt=" + thisDay.ToString("yyyy-MM-dd");
             HttpResponseMessage response2 = client.GetAsync(url2).Result;
             if (response2.IsSuccessStatusCode)
             {

@@ -14,6 +14,7 @@ namespace Web_API.models.weatherapi
         public string? time { get; set; }
         public string? forecast { get; set; }
         public string? forecastIcon { get; set; }
+        public string? UpdateTime {get; set; }
         
     }
 }

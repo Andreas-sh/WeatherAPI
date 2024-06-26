@@ -10,9 +10,12 @@ function Weather() {
     const sunset = document.getElementById('sunset');
     
 
-                                         
-    const town = document.getElementById('towns');
-    const apiUrl = 'http://localhost:5046/WeatherForecast/GetWeatherForecast?city='+town.value;
+    //                                     
+    const inputValue = document.getElementById('towns').value;
+    const city = inputValue.split(',')[0].trim();
+    const country = inputValue.split(',')[1].trim();
+
+    const apiUrl = "http://localhost:5046/WeatherForecast/GetWeatherForecast?city="+city+"&country="+country;
     fetch(apiUrl)
         .then(response => {
             if (!response.ok) {
@@ -90,9 +93,9 @@ function autocomplete(inp) {
               b = document.createElement("DIV");
               /*make the matching letters bold:*/
               b.innerHTML = "<strong>" + arr[i]["name"].substr(0, val.length) + "</strong>";
-              b.innerHTML += arr[i]["name"].substr(val.length) +", " + arr[i]["country"];
+              b.innerHTML += arr[i]["name"].substr(val.length) + ", " + arr[i]["country"];
               /*insert a input field that will hold the current array item's value:*/
-              b.innerHTML += "<input type='hidden' value='" + arr[i]["name"]+" "+ arr[i]["country"] + "'>";
+              b.innerHTML += "<input type='hidden' value='" + arr[i]["name"]+ ", "+ arr[i]["country"] + "'>";
               /*execute a function when someone clicks on the item value (DIV element):*/
               b.addEventListener("click", function(e) {
                   /*insert the value for the autocomplete text field:*/

@@ -12,22 +12,28 @@ namespace Web_API.Controllers
     {
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly WeatherForecastService _weatherForecastService;
-        private readonly DBService _dbservice;
+        private readonly DBcontext _context;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration configuration)
+
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration configuration,  DBcontext context)
         {
             _logger = logger;
             _weatherForecastService = new WeatherForecastService(configuration);
-            _dbservice = new DBService(configuration);
+            _context = context;
         }
 
         [HttpGet("GetWeatherForecast")]
-        public async Task<IActionResult> GetWeatherForecast(string city)
+        public async Task<IActionResult> GetWeatherForecast(string city, string country)
         {
+            WeatherItem? DbItem = _context.WeatherItems.FirstOrDefault(i => i.CityName == city && i.CountryName == country);
+            if(DbItem == null)
+            {
+                
+            }
             WeatherForecast finalResponse = new WeatherForecast();
 
-            ForecastResponse? forecastResponse = _weatherForecastService.GetCurrentForecast(city);
-            AstronomyResponse? astronomyResponse  = _weatherForecastService.GetAstronomy(city);
+            ForecastResponse? forecastResponse = _weatherForecastService.GetCurrentForecast(city, country);
+            AstronomyResponse? astronomyResponse  = _weatherForecastService.GetAstronomy(city, country);
             if (forecastResponse != null)
             {
                 finalResponse.Name = forecastResponse.Name;
@@ -44,6 +50,7 @@ namespace Web_API.Controllers
             
             return Ok(finalResponse);
             //return BadRequest();
+
         }
 
         [HttpGet("GetCityNames")]
@@ -59,13 +66,6 @@ namespace Web_API.Controllers
             
             AutocompleteResponse[]? autoCompleteResponse = _weatherForecastService.SearchCities(city);
             return Ok(autoCompleteResponse);
-        }
-        
-        [HttpGet("GetDBList")]
-        public async Task<IActionResult> GetDBList(string countryName , string cityName) 
-        { 
-             List<WeatherForecast> response =  _dbservice.GetCityForecast(countryName , cityName);
-             return Ok(response);
         }
     }
 }
