@@ -8,6 +8,7 @@ namespace Web_API.models;
 public class WeatherForecast
 {
     public string? Name { get; set; }
+    public string? Country { get; set;}
     public string? Temp { get; set; }
     public string? Time { get; set; }
     public string? Weather { get; set; }

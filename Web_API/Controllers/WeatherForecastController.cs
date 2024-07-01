@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using Web_API.models;
 using Web_API.models.weatherapi;
@@ -25,11 +26,7 @@ namespace Web_API.Controllers
         [HttpGet("GetWeatherForecast")]
         public async Task<IActionResult> GetWeatherForecast(string city, string country)
         {
-            WeatherItem? DbItem = _context.WeatherItems.FirstOrDefault(i => i.CityName == city && i.CountryName == country);
-            if(DbItem == null)
-            {
-                
-            }
+            
             WeatherForecast finalResponse = new WeatherForecast();
 
             ForecastResponse? forecastResponse = _weatherForecastService.GetCurrentForecast(city, country);
@@ -48,8 +45,29 @@ namespace Web_API.Controllers
                 finalResponse.sunset = astronomyResponse.sunset;
             }
             
+            
+            WeatherItem? DbItem = _context.WeatherItems
+            .Include(i => i.Astronomy)
+            .FirstOrDefault(i => i.CityName == city && i.CountryName == country);
+            if(DbItem == null)
+            {
+                DbItem = new WeatherItem();
+
+                DbItem.CityName = forecastResponse.Name;
+                DbItem.CountryName = forecastResponse.Country;
+                DbItem.forecast = forecastResponse.Weather;
+                DbItem.temp = forecastResponse.Temp;
+                DbItem.time = forecastResponse.Time;
+                DbItem.forecastIcon = forecastResponse.weather_pic;
+
+                DbItem.Astronomy = new AstronomyItem();
+                DbItem.Astronomy.sunriseTime = astronomyResponse.Sunrise;
+                DbItem.Astronomy.sunsetTime = astronomyResponse.sunset;
+                
+                _context.WeatherItems.Add(DbItem);
+                await _context.SaveChangesAsync();
+            }
             return Ok(finalResponse);
-            //return BadRequest();
 
         }
 

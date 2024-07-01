@@ -8,6 +8,7 @@ namespace Web_API.models.weatherapi
     public class WeatherItem
     {
         public long Id { get; set; }
+        public long AstronomyId {get; set; }
         public string? CityName { get; set; }
         public string? CountryName { get; set; }
         public string? temp { get; set; }
@@ -15,6 +16,7 @@ namespace Web_API.models.weatherapi
         public string? forecast { get; set; }
         public string? forecastIcon { get; set; }
         public string? UpdateTime {get; set; }
+        public AstronomyItem Astronomy {get; set;}
         
     }
 }

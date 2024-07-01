@@ -10,6 +10,5 @@ namespace Web_API.models.weatherapi
         public long Id {get; set; }
         public string? sunriseTime { get; set; }
         public string? sunsetTime { get; set; }
-        
     }
 }

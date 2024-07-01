@@ -30,6 +30,7 @@ public class WeatherForecastService
 
                 ForecastResponse forecastResponse = new ForecastResponse();
                 forecastResponse.Name = jsonObject["location"]?["name"]?.Value<string>();
+                forecastResponse.Country = jsonObject["location"]?["country"]?.Value<string>();
                 forecastResponse.Temp = jsonObject["current"]?["temp_c"]?.Value<string>();
                 forecastResponse.Time = jsonObject["location"]?["localtime"]?.Value<string>();
                 forecastResponse.Weather = jsonObject["current"]?["condition"]?["text"]?.Value<string>();
