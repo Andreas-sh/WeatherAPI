@@ -59,6 +59,7 @@ namespace Web_API.Controllers
                 DbItem.temp = forecastResponse.Temp;
                 DbItem.time = forecastResponse.Time;
                 DbItem.forecastIcon = forecastResponse.weather_pic;
+                DbItem.UpdateTime = DateTime.Now.ToString("h:mm");
 
                 DbItem.Astronomy = new AstronomyItem();
                 DbItem.Astronomy.sunriseTime = astronomyResponse.Sunrise;
