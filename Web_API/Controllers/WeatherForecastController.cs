@@ -49,6 +49,9 @@ namespace Web_API.Controllers
             WeatherItem? DbItem = _context.WeatherItems
             .Include(i => i.Astronomy)
             .FirstOrDefault(i => i.CityName == city && i.CountryName == country);
+            DateTime CurrentTime = DateTime.Now;
+           
+            
             if(DbItem == null)
             {
                 DbItem = new WeatherItem();
@@ -59,7 +62,7 @@ namespace Web_API.Controllers
                 DbItem.temp = forecastResponse.Temp;
                 DbItem.time = forecastResponse.Time;
                 DbItem.forecastIcon = forecastResponse.weather_pic;
-                DbItem.UpdateTime = DateTime.Now.ToString("h:mm");
+                DbItem.UpdateTime = DateTime.Now;
 
                 DbItem.Astronomy = new AstronomyItem();
                 DbItem.Astronomy.sunriseTime = astronomyResponse.Sunrise;
@@ -67,6 +70,29 @@ namespace Web_API.Controllers
                 
                 _context.WeatherItems.Add(DbItem);
                 await _context.SaveChangesAsync();
+                
+            }
+            else if(CurrentTime > DbItem.UpdateTime.AddHours(1)){
+                
+                _context.WeatherItems.Remove(DbItem);
+                await _context.SaveChangesAsync();
+                DbItem = new WeatherItem();
+                DbItem.CityName = forecastResponse.Name;
+                DbItem.CountryName = forecastResponse.Country;
+                DbItem.forecast = forecastResponse.Weather;
+                DbItem.temp = forecastResponse.Temp;
+                DbItem.time = forecastResponse.Time;
+                DbItem.forecastIcon = forecastResponse.weather_pic;
+                DbItem.UpdateTime = DateTime.Now;
+
+                DbItem.Astronomy = new AstronomyItem();
+                DbItem.Astronomy.sunriseTime = astronomyResponse.Sunrise;
+                DbItem.Astronomy.sunsetTime = astronomyResponse.sunset;
+                
+                _context.WeatherItems.Add(DbItem);
+                await _context.SaveChangesAsync();
+                
+
             }
             return Ok(finalResponse);
 
