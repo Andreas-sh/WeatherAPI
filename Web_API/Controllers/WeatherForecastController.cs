@@ -26,30 +26,31 @@ namespace Web_API.Controllers
         [HttpGet("GetWeatherForecast")]
         public async Task<IActionResult> GetWeatherForecast(string city, string country)
         {
-            
             WeatherForecast finalResponse = new WeatherForecast();
 
-            ForecastResponse? forecastResponse = _weatherForecastService.GetCurrentForecast(city, country);
-            AstronomyResponse? astronomyResponse  = _weatherForecastService.GetAstronomy(city, country);
-            if (forecastResponse != null)
-            {
-                finalResponse.Name = forecastResponse.Name;
-                finalResponse.Temp = forecastResponse.Temp;
-                finalResponse.Time = forecastResponse.Time;
-                finalResponse.Weather = forecastResponse.Weather;
-                finalResponse.weather_pic = forecastResponse.weather_pic;
-            }
-            if(astronomyResponse != null)
-            {
-                finalResponse.Sunrise = astronomyResponse.Sunrise;
-                finalResponse.sunset = astronomyResponse.sunset;
-            }
-            
-            
             WeatherItem? DbItem = _context.WeatherItems
             .Include(i => i.Astronomy)
             .FirstOrDefault(i => i.CityName == city && i.CountryName == country);
             DateTime CurrentTime = DateTime.Now;
+
+            if(DbItem != null && CurrentTime <= DbItem.UpdateTime.AddHours(1))
+            {
+                finalResponse.Name = DbItem.CityName;
+                finalResponse.Temp = DbItem.temp;
+                finalResponse.Time = DbItem.time;
+                finalResponse.Weather = DbItem.forecast;
+                finalResponse.weather_pic = DbItem.forecastIcon;
+                finalResponse.Sunrise = DbItem.Astronomy.sunriseTime;
+                finalResponse.sunset = DbItem.Astronomy.sunsetTime;
+                return Ok(finalResponse);
+            }
+            
+            ForecastResponse? forecastResponse = _weatherForecastService.GetCurrentForecast(city, country);
+            AstronomyResponse? astronomyResponse  = _weatherForecastService.GetAstronomy(city, country);
+            
+            
+            
+            
            
             
             if(DbItem == null)
@@ -72,28 +73,34 @@ namespace Web_API.Controllers
                 await _context.SaveChangesAsync();
                 
             }
-            else if(CurrentTime > DbItem.UpdateTime.AddHours(1)){
-                
-                _context.WeatherItems.Remove(DbItem);
-                await _context.SaveChangesAsync();
-                DbItem = new WeatherItem();
-                DbItem.CityName = forecastResponse.Name;
-                DbItem.CountryName = forecastResponse.Country;
+            else if(CurrentTime > DbItem.UpdateTime.AddHours(1))
+            {
                 DbItem.forecast = forecastResponse.Weather;
                 DbItem.temp = forecastResponse.Temp;
                 DbItem.time = forecastResponse.Time;
                 DbItem.forecastIcon = forecastResponse.weather_pic;
                 DbItem.UpdateTime = DateTime.Now;
-
-                DbItem.Astronomy = new AstronomyItem();
+                
                 DbItem.Astronomy.sunriseTime = astronomyResponse.Sunrise;
                 DbItem.Astronomy.sunsetTime = astronomyResponse.sunset;
                 
-                _context.WeatherItems.Add(DbItem);
+                _context.WeatherItems.Update(DbItem);
                 await _context.SaveChangesAsync();
-                
-
             }
+            if (forecastResponse != null)
+            {
+                finalResponse.Name = DbItem.CityName;
+                finalResponse.Temp = DbItem.temp;
+                finalResponse.Time = DbItem.time;
+                finalResponse.Weather = DbItem.forecast;
+                finalResponse.weather_pic = DbItem.forecastIcon;
+            }
+            if(astronomyResponse != null)
+            {
+                finalResponse.Sunrise = DbItem.Astronomy.sunriseTime;
+                finalResponse.sunset = DbItem.Astronomy.sunsetTime;
+            }
+            
             return Ok(finalResponse);
 
         }
